@@ -78,14 +78,13 @@ MIDDLEWARE = [
 # --------------------------------------------------
 # CORS Settings (Updated)
 # --------------------------------------------------
-CORS_ALLOW_ALL_ORIGINS = True  # সমস্ত অরিজিন বা ডোমেইন থেকে রিকোয়েস্ট অ্যালাউ করবে
-
+CORS_ALLOW_ALL_ORIGINS = True  
 CORS_ALLOW_HEADERS = [
-    "*",  # সমস্ত রিকোয়েস্ট হেডার (x-hotel-id সহ) একসাথে অ্যালাউ করবে
+    "*",  
 ]
 
 CORS_ALLOW_METHODS = [
-    "*",  # সমস্ত HTTP মেথড অ্যালাউ করবে
+    "*",  
 ]
 
 

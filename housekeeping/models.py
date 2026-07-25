@@ -15,7 +15,7 @@ class HousekeepingTask(models.Model):
         ('high', 'High'),
     )
 
-    # Note: Tenant DB-তে 'rooms' টেবিল অলরেডি আছে
+    
     room_number = models.CharField(max_length=20)
     assigned_staff_name = models.CharField(max_length=100, blank=True, null=True)
     status = models.CharField(max_length=20, choices=TASK_STATUS, default='dirty')
