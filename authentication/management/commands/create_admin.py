@@ -7,26 +7,34 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         User = get_user_model()
         
-        # Create user in default DB
-        u1, created1 = User.objects.using('default').get_or_create(
-            username='admin', 
-            defaults={'email': 'admin@example.com'}
-        )
-        u1.set_password('admin123')
-        u1.is_superuser = True
-        u1.is_staff = True
-        u1.is_active = True
-        u1.save()
+        # 1. Create user in default DB
+        try:
+            u1, created1 = User.objects.using('default').get_or_create(
+                username='admin', 
+                defaults={'email': 'admin@example.com'}
+            )
+            u1.set_password('admin123')
+            u1.is_superuser = True
+            u1.is_staff = True
+            u1.is_active = True
+            u1.save(using='default')
+            self.stdout.write(self.style.SUCCESS('Admin created in default database!'))
+        except Exception as e:
+            self.stdout.write(self.style.ERROR(f'Default DB Error: {e}'))
 
-        # Create user in hotel DB
-        u2, created2 = User.objects.using('hotel').get_or_create(
-            username='admin', 
-            defaults={'email': 'admin@example.com'}
-        )
-        u2.set_password('admin123')
-        u2.is_superuser = True
-        u2.is_staff = True
-        u2.is_active = True
-        u2.save()
+        # 2. Create user in hotel DB
+        try:
+            u2, created2 = User.objects.using('hotel').get_or_create(
+                username='admin', 
+                defaults={'email': 'admin@example.com'}
+            )
+            u2.set_password('admin123')
+            u2.is_superuser = True
+            u2.is_staff = True
+            u2.is_active = True
+            u2.save(using='hotel')
+            self.stdout.write(self.style.SUCCESS('Admin created in hotel database!'))
+        except Exception as e:
+            self.stdout.write(self.style.ERROR(f'Hotel DB Error: {e}'))
 
-        self.stdout.write(self.style.SUCCESS('ADMIN USERS CREATED SUCCESSFULLY!'))
+        self.stdout.write(self.style.SUCCESS('ADMIN CREATION PROCESS COMPLETED!'))
