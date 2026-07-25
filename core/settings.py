@@ -133,15 +133,13 @@ DATABASES = {
     },
     "hotel": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "digha_db",  
+        "NAME": "digha_db",
         "USER": os.getenv("DB_USER", "postgres"),
         "PASSWORD": os.getenv("DB_PASSWORD", "your_password"),
         "HOST": os.getenv("DB_HOST", "localhost"),
         "PORT": os.getenv("DB_PORT", "5432"),
-        "TIME_ZONE": None,    
-    },
+    }
 }
-
 # Database Routers
 DATABASE_ROUTERS = [
     "core.database_router.DatabaseRouter",
