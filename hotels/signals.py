@@ -8,8 +8,8 @@ from .models import Hotel
 
 @receiver(post_save, sender=Hotel)
 def create_tenant_database(sender, instance, created, **kwargs):
-    if created and instance.db_name:
-        db_name = instance.db_name
+   if created and instance.database_name:
+        db_name = instance.database_name
         
         # 1. Connect to PostgreSQL master engine to create new database
         db_settings = settings.DATABASES['default']
