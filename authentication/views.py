@@ -214,17 +214,3 @@ class SwitchHotelAPIView(APIView):
         )
 
 
-class TempPasswordResetView(APIView):
-    authentication_classes = []
-    permission_classes = []
-
-    def get(self, request):
-        secret = request.GET.get("secret")
-        if secret != "myTempSecret123":
-            return Response({"error": "Unauthorized"}, status=403)
-
-        user = User.objects.using("default").get(username="admin")
-        user.set_password("admin@1234")
-        user.save(using="default")
-
-        return Response({"success": True, "message": "Password reset done"})
