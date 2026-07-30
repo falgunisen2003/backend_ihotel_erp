@@ -26,8 +26,14 @@ class DatabaseMiddleware:
                 
                 
                 if hotel_conn.settings_dict.get('NAME') != hotel.database_name:
-                    hotel_conn.close()  # পুরানো connection close করো
-                    hotel_conn.settings_dict['NAME'] = hotel.database_name  
+                    hotel_conn.close() 
+
+                    hotel_conn.settings_dict['NAME'] = hotel.database_name
+                    hotel_conn.settings_dict['HOST'] = hotel.database_host
+                    hotel_conn.settings_dict['USER'] = hotel.database_user
+                    hotel_conn.settings_dict['PASSWORD'] = hotel.database_password
+                    hotel_conn.settings_dict['PORT'] = hotel.database_port
+                    hotel_conn.settings_dict['ENGINE'] = hotel.database_engine
                     
             except (Hotel.DoesNotExist, ValueError):
                 _thread_locals.hotel = None
